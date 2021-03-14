@@ -1,0 +1,27 @@
+version: '2'
+services:
+  grafana:
+    container_name: grafana 
+    image: grafana/grafana:latest
+    restart: always
+    volumes:
+      - ./grafana:/var/lib/grafana
+    links:
+      - prometheus
+    ports:
+        - "3000:3000"
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:latest
+    restart: always
+    links:
+      - hue_exporter
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/data:/prometheus 
+  hue_exporter: 
+      container_name: hue_exporter
+      image: mitchellrj/hue_exporter:latest
+      restart: always
+      volumes:
+        - ./hue_exporter/config.yml:/etc/hue_exporter/config.yml
