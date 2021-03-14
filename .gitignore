@@ -1,2 +1,5 @@
 /hue_exporter.yml
 /hue_exporter
+/docker-compose/grafana
+/docker-compose/prometheus/data
+.DS_Store

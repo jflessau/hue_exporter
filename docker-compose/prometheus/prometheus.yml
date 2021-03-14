@@ -1,0 +1,11 @@
+global:
+  scrape_interval:     5s
+  evaluation_interval: 30s
+
+  external_labels:
+    monitor: hue_bridge
+
+scrape_configs:
+  - job_name: hue_reachable
+    static_configs:
+      - targets: ['hue_exporter:9366']
