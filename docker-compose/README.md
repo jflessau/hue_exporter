@@ -16,3 +16,7 @@ Deploy a dashboard for your Philips Hue devices with just one docker-compose fil
 
 Your Dashboard should now look like this (depending on the devices you have):
 ![Grafana Dashboard for Philips Hue](screenshot.png)
+
+## On ARM (e.g. Raspberry Pi)
+
+Replace the command in step 4 with `docker-compose -f arm.yml up`.

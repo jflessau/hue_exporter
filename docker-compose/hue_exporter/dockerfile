@@ -1,0 +1,19 @@
+# Dockerfile for ARM
+
+FROM balenalib/raspberry-pi-debian-golang:latest
+
+WORKDIR /go/src/app
+
+# cloning bc docker doesn't allow COPY ./../..
+RUN git clone https://github.com/mitchellrj/hue_exporter
+
+RUN cd hue_exporter && cp -R * ../
+
+RUN go get -v
+RUN go build -o hue_exporter_arm_v7 *.go
+RUN cp hue_exporter_arm_v7 /bin/hue_exporter_arm_v7
+
+COPY config.yml /etc/hue_exporter/config.yml
+
+ENTRYPOINT  [ "/bin/hue_exporter_arm_v7" ]
+CMD         [ "--config.file=/etc/hue_exporter/config.yml" ]
